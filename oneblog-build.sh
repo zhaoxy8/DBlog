@@ -38,7 +38,7 @@ fi
 if [[ $newpackeage =~ "blog" ]]
 then
     reponame="oneblog"
-	version=`grep 'ENTRYPOINT java' Dockerfile||awk -F '-' '{print $3}'|cut -d '.' -f 1-3`
+	version=`grep 'ENTRYPOINT java' Dockerfile|awk -F ' ' '{print $4}'|awk -F '-' '{print $3}'|cut -d '.' -f 1-3`
 else
     reponame=`grep 'ENTRYPOINT java' Dockerfile|awk -F '-' '{print $3$4}'`
 	version=`grep 'ENTRYPOINT java' Dockerfile|awk -F '-' '{print $5}'|cut -d '.' -f 1-3`
@@ -47,7 +47,7 @@ fi
 newport=`grep 'EXPOSE' Dockerfile|awk -F ' ' '{print $2}'`
 docker build -t xy1219.zhao/$reponame:latest .
 echo;echo;echo "===================== [STEP 1-2] run container =====================";echo;echo
-docker run -d -p $newport:$newport $reponame:latest
+docker run -d -p $newport:$newport xy1219.zhao/$reponame:latest
 
 cat <<EOF > pipeline-init.json
 {

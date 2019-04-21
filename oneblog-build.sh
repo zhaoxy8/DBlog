@@ -22,7 +22,7 @@ sed -i "s/$oldpackeage/$newpackeage/g" Dockerfile
 oldport=`grep 'EXPOSE' Dockerfile|awk -F ' ' '{print $2}'`
 if [[ $newpackeage =~ "baidu" ]]
 then
-    sed -i "s/$oldport/8443/g" Dockerfile
+    sed -i "s/$oldport/8080/g" Dockerfile
 elif [[ $newpackeage =~ "jd" ]]
 then
     sed -i "s/$oldport/5060/g" Dockerfile
@@ -47,44 +47,13 @@ fi
 newport=`grep 'EXPOSE' Dockerfile|awk -F ' ' '{print $2}'`
 docker build -t xy1219.zhao/$reponame:latest .
 echo;echo;echo "===================== [STEP 1-2] run container =====================";echo;echo
-docker run -d -p $newport:$newport xy1219.zhao/$reponame:latest
-
+ImageId=`docker run -d -p $newport:$newport xy1219.zhao/$reponame:latest`
+echo $ImageId
 cat <<EOF > pipeline-init.json
 {
     "dockerImageTag" : "$version",
     "dockerRepoUrl" : "$reponame",
+    "dockerImageId" : "$ImageId",
     "dockerport" : "$newport"
 }
 EOF
-echo;echo;echo "===================== [STEP 1-3] run container test =====================";echo;echo
-
-
-echo;echo;echo "===================== [STEP 1-4] push image to ECR =====================";echo;echo
-docker tag xy1219.zhao/$reponame:latest 10.82.254.142:5000/$reponame:$version
-docker push 10.82.254.142:5000/$reponame:$version
-
-#$(aws --profile bixby-cndev ecr get-login --no-include-email --region cn-north-1)
-awsloginCmd=`aws --profile ${env} ecr get-login --region cn-north-1 | sed -e 's/-e none//g'`
-sh ${awsloginCmd}
-
-docker tag xy1219.zhao/$reponame:latest 077516810609.dkr.ecr.cn-north-1.amazonaws.com.cn/xy1219.zhao/$reponame:$version
-docker push 077516810609.dkr.ecr.cn-north-1.amazonaws.com.cn/xy1219.zhao/$reponame:$version || checkPass=1
-if [ ${checkPass} -ne 0 ]; then
-    exit 1
-fi
-
-docker tag xy1219.zhao/$reponame:latest 077516810609.dkr.ecr.cn-north-1.amazonaws.com.cn/xy1219.zhao/$reponame:latest
-docker push 077516810609.dkr.ecr.cn-north-1.amazonaws.com.cn/xy1219.zhao/$reponame:latest || checkPass=1
-if [ ${checkPass} -ne 0 ]; then
-    exit 1
-fi
-
-version_old=`aws --profile ${env} ecr list-images  --repository-name xy1219.zhao/$reponame|jq .imageIds[0].imageTag`
-
-echo $version_old
-#docker tag xy1219.zhao/baidu-token-dr:$version 081396032000.dkr.ecr.cn-northwest-1.amazonaws.com.cn/xy1219.zhao/baidu-token-dr:v$version
-
-#docker push 081396032000.dkr.ecr.cn-northwest-1.amazonaws.com.cn/xy1219.zhao/baidu-token-dr:v$version
-
-echo "============================xy1219.zhao/$reponame========================================"
-curl -X GET http://10.82.254.142:5000/v2/$reponame/tags/list

@@ -103,30 +103,27 @@
                 <article class="fade-in" style="height: auto">
                     <div class="rows">
                         <div class="col-md-10 col-sm-12">
-                            <div class="h3 text-center">亲，啥也没找到啊~~fffffffffff<img src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/15/j_thumb.gif" alt="[囧]"></div>
-                            <div class="h5 text-center">换个姿势，再来一次~~</div>
-                        </div>
-                        <div class="col-md-2 col-sm-12">
-                            <img src="${config.staticWebSite}/img/wrong.gif" class="center-block" alt="惩罚我" style="width: 110px;margin-top: -10px;">
+                            <div class="h1 text-center">Thanks for using kubernetes!</div>
+                            <div class="h2 text-center">Jenkins pipline is very handy for creating docker images</div>
                         </div>
                     </div>
                     <form action="/" method="post" class="form-horizontal searchForm">
                         <input type="hidden" name="pageNumber" value="1">
                         <div class="input-group">
-                            <input type="text" class="form-control br-none" name="keywords" placeholder="换个姿势，再来一次~~">
+                            <input type="text" class="form-control br-none" name="keywords" placeholder="search">
                             <span class="input-group-btn">
-                                <button class="btn btn-default br-none nav-search-btn pointer" type="submit"><i class="fa fa-search"></i> 搜索</button>
+                                <button class="btn btn-default br-none nav-search-btn pointer" type="submit"><i class="fa fa-search"></i> search</button>
                             </span>
                         </div>
                         <div class="clear" style="margin-bottom: 10px"></div>
                         <ul class="list-unstyled list-inline search-hot">
-                            <li><strong style="position: relative;top: 2px;color: #999999;">热门搜索：</strong></li>
+                            <li><strong style="position: relative;top: 2px;color: #999999;">Top search：</strong></li>
                             <li><a class="pointer" rel="external nofollow"><span class="label label-default">Java</span></a></li>
                             <li><a class="pointer" rel="external nofollow"><span class="label label-primary">Springboot</span></a></li>
                             <li><a class="pointer" rel="external nofollow"><span class="label label-success">Linux</span></a></li>
                             <li><a class="pointer" rel="external nofollow"><span class="label label-info">Maven</span></a></li>
                             <li><a class="pointer" rel="external nofollow"><span class="label label-warning">Bootstrap</span></a></li>
-                            <li><a class="pointer" rel="external nofollow"><span class="label label-danger">阿里云</span></a></li>
+                            <li><a class="pointer" rel="external nofollow"><span class="label label-danger">ali cloud</span></a></li>
                         </ul>
                     </form>
                 </article>

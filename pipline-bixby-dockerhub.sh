@@ -5,8 +5,8 @@ set -e
 checkPass=0
 env=bixby-cndev
 
-dockerImageTag=` cat pipeline-init.json | jq -r .dockerImageTag ` version
-dockerRepoUrl=` cat pipeline-init.json | jq -r .dockerRepoUrl `oneblog
+dockerImageTag=` cat pipeline-init.json | jq -r .dockerImageTag `
+dockerRepoUrl=` cat pipeline-init.json | jq -r .dockerRepoUrl `
 dockerImageId=` cat pipeline-init.json | jq -r .dockerImageId `
 dockerport=` cat pipeline-init.json | jq -r .dockerport `
 username=shuigjdocker
@@ -42,13 +42,13 @@ fi
 if [ ${checkPass} -ne 0 ]; 
 then
 	echo "${dockerImageId} have some bug issue"
-    docker stop $dockerImageId
+        docker stop $dockerImageId
 	docker rm -f $dockerImageId
 	exit 1
 else
     echo "${dockerImageId} test is ok!"
     docker stop $dockerImageId
-	docker rm -f $dockerImageId
+    docker rm -f $dockerImageId
 fi
 
 echo;echo;echo "===================== [STEP 1-4] push image to dockerhub =====================";echo;echo

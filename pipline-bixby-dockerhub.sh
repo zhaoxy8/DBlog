@@ -54,3 +54,8 @@ fi
 echo;echo;echo "===================== [STEP 1-4] push image to dockerhub =====================";echo;echo
 docker tag xy1219.zhao/$dockerRepoUrl:latest $username/$dockerRepoUrl:$dockerImageTag
 docker push $username/$dockerRepoUrl:$dockerImageTag
+
+echo;echo;echo "===================== [STEP 1-5] create results.yml =====================";echo;echo
+cat << EOF > results.yml
+aws_source_ami: index.docker.io/$username/$dockerRepoUrl:$dockerImageTag
+EOF

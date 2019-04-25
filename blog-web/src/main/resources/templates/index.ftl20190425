@@ -129,6 +129,7 @@
                 </article>
             </#if>
         </div>
+        <#include "layout/sidebar.ftl"/>
     </div>
 </div>
 

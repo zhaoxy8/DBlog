@@ -105,6 +105,8 @@
                         <div class="col-md-10 col-sm-12">
                             <div class="h1 text-center">Thanks for using kubernetes!</div>
                             <div class="h2 text-center">Jenkins pipline is very handy for creating docker images</div>
+			    <div class="h1 text-center"><a class="pointer" rel="external nofollow"><span class="label label-default">Thanks for us
+ing kubernetes!</span></a></div>
                         </div>
                     </div>
                     <form action="/" method="post" class="form-horizontal searchForm">
@@ -132,5 +134,4 @@
     </div>
 </div>
 
-<@footer></@footer>
 </@compress>
